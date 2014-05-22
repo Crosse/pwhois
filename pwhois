@@ -127,9 +127,10 @@ class WhoisParser
     private
     def print_header()
         case output_style
-        when (:csv || :tsv)
-            sep = output_style == :csv ? "," : "\t"
-            puts attributes.map{ |a| quote_if_include(a.titleize, sep) }.join(sep)
+        when :csv
+            puts attributes.map{ |a| quote_if_include(a.titleize, ',') }.join(',')
+        when :tsv
+            puts attributes.map{ |a| quote_if_include(a.titleize, "\t") }.join("\t")
         when :table
             print_verbose("collating data, please wait...")
         end
