@@ -1,3 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "whois"
+# Specify your gem's dependencies in pwhois.gemspec
+gemspec
