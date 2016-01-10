@@ -32,8 +32,10 @@ module Pwhois
             end
 
             if "#{attr}".start_with?("registrar")
-                a = "#{attr}".split('_')[1]
-                get_attr(record.registrar, a)
+                if record.registrar != nil
+                    a = "#{attr}".split('_')[1]
+                    get_attr(record.registrar, a)
+                end
             else
                 if record.respond_to?(attr)
                     record.send(attr)
