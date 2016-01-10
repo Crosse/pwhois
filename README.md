@@ -1,6 +1,8 @@
 pwhois
 ======
 
+[![Gem Version](https://badge.fury.io/rb/pwhois.svg)](https://badge.fury.io/rb/pwhois)
+
 `pwhois` is a small command-line utility that takes advantage of the
 [Ruby Whois][whois] module to parse Whois results and display them in a
 coherent style.  From their [Parsers][parsers] page:
@@ -19,8 +21,12 @@ subset of possible returned properties.  See the gem's
 you're a Ruby guru, please don't look too closely at the code.  Or if you
 do, let me know where I could do things better.  Thanks!)*
 
+# Installation
+
+    $ gem install pwhois
+
 # Usage
-    $ ./pwhois -h
+    $ pwhois -h
     Usage: pwhois [options]
     
     Specific options:
@@ -32,19 +38,19 @@ do, let me know where I could do things better.  Thanks!)*
 # Output Styles
 
 ## CSV (Comma-Separated Values)
-    $ ./pwhois -o csv github.com
+    $ pwhois -o csv github.com
     Domain,Created On,Updated On,Registrar Name
     github.com,2013-06-14 19:07:02 -0400,2013-11-27 07:00:15 -0500,"MarkMonitor, Inc."
 
 
 ## TSV (Tab-Separated Values)
-    $ ./pwhois -o tsv github.com
+    $ pwhois -o tsv github.com
     Domain  Created On      Updated On      Registrar Name
     github.com      2013-06-14 19:07:02 -0400       2013-11-27 07:00:15 -0500       MarkMonitor, Inc.
 
 
 ## List (Default Style)
-    $ ./pwhois -o list github.com
+    $ pwhois -o list github.com
     Domain        : github.com
     Created On    : 2013-06-14 19:07:02 -0400
     Updated On    : 2013-11-27 07:00:15 -0500
@@ -52,7 +58,7 @@ do, let me know where I could do things better.  Thanks!)*
 
 
 ## Table
-    $ ./pwhois -o table github.com
+    $ pwhois -o table github.com
     Domain      Created On                 Updated On                 Registrar Name     
     ----------  -------------------------  -------------------------  -----------------  
     github.com  2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.  
@@ -67,7 +73,7 @@ a format useful to the style.
 
 The header line is printed only once:
 
-    $ ./pwhois -o csv $(<domains.txt)
+    $ pwhois -o csv $(<domains.txt)
     Domain,Created On,Updated On,Registrar Name
     github.com,2013-06-14 19:07:02 -0400,2013-11-27 07:00:15 -0500,"MarkMonitor, Inc."
     google.com,2002-10-02 03:00:00 -0400,2014-05-19 07:00:17 -0400,"MarkMonitor, Inc."
@@ -80,7 +86,7 @@ The header line is printed only once:
 
 Individual records are separated by a blank line:
 
-    $ ./pwhois -o list $(<domains.txt)
+    $ pwhois -o list $(<domains.txt)
     Domain        : github.com
     Created On    : 2013-06-14 19:07:02 -0400
     Updated On    : 2013-11-27 07:00:15 -0500
@@ -114,7 +120,7 @@ multiple queries will not output results until the last query is finished,
 in order to figure out proper column widths.  If you want to know what's
 going on, use the `-v|--verbose` option.)
 
-    $ ./pwhois -o table $(<domains.txt)
+    $ pwhois -o table $(<domains.txt)
     Domain          Created On                 Updated On                 Registrar Name               
     --------------  -------------------------  -------------------------  ---------------------------  
     github.com      2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.            
@@ -138,7 +144,7 @@ The default set of attributes printed by the utility are `domain`,
 another set of attributes you're interested in, you can do so with the
 `-a|--attributes` option:
 
-    $ ./pwhois -a domain,created_on,status github.com
+    $ pwhois -a domain,created_on,status github.com
     Domain    : github.com
     Created On: 2013-06-14 19:07:02 -0400
     Status    : registered
@@ -147,7 +153,7 @@ Note that attributes under Registrar can be specified by prepending
 "registrar\_" to the attribute name.  For instance, to print the registrar
 name and ID:
 
-    $ ./pwhois -a domain,registrar_name,registrar_id crosse.org
+    $ pwhois -a domain,registrar_name,registrar_id crosse.org
     Domain        : crosse.org
     Registrar Name: eNom, Inc. (R39-LROR)
     Registrar Id  : 48
@@ -161,7 +167,7 @@ so yet.)
 Useful for table-style output with multiple queries, or if you just want to
 see what sort of weird verbose logging I do, you can enable verbose mode:
 
-    $ ./pwhois -v -o table $(<domains.txt)
+    $ pwhois -v -o table $(<domains.txt)
     [ collating data, please wait... ]
     [ Querying whois for github.com... ]
     [ Querying whois for google.com... ]
@@ -186,7 +192,6 @@ Verbose output is printed to `stderr`.
 - Handle `registrant_contacts`, `admin_contacts`, `technical_contacts`, and
   `nameservers`.  Note that these are potentially arrays of things.
 - Handle timeouts and ECONNRESETs in a happier fashion than dying horribly.
-- Learn Ruby.
 
 [whois]: http://ruby-whois.org
 [properties]: http://ruby-whois.org/manual/parser/properties/
