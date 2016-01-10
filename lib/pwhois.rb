@@ -2,27 +2,21 @@ require 'optparse'
 require 'whois'
 require 'pwhois/version'
 
-module Pwhois
-    class Symbol
-        def titleize()
-            to_s.split('_').map { |words| words.capitalize }.join(' ')
-        end
+class Symbol
+    def titleize()
+        to_s.split('_').map { |words| words.capitalize }.join(' ')
     end
+end
+
+module Pwhois
+    OUTPUT_STYLES = [ :csv, :tsv, :table, :list ]
 
     class WhoisParser
         # Constants
         UNKNOWN = "UNKNOWN"
 
-        # Class variables
-        @@OUTPUT_STYLES = [ :csv, :tsv, :table, :list ]
-
         # Instance variables
         attr_accessor :verbose, :output_style, :attributes
-
-        def self.output_styles
-            @@OUTPUT_STYLES
-        end # output_styles
-
 
         def initialize()
             @whois_client = Whois::Client.new

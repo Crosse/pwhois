@@ -14,8 +14,8 @@ OptionParser.new do |opts|
         w.verbose = v
     end
 
-    output_list = w.output_styles.join(', ')
-    opts.on("-o", "--output TYPE", w.output_styles,
+    output_list = Pwhois::OUTPUT_STYLES.join(', ')
+    opts.on("-o", "--output TYPE", Pwhois::OUTPUT_STYLES,
             "Output style.  One of: #{output_list}") do |style|
         w.output_style = style
     end
@@ -35,7 +35,8 @@ OptionParser.new do |opts|
     end
 
     opts.on_tail("-V", "--version", "Show version") do
-        puts w::Version
+        puts Pwhois::VERSION
+        exit
         exit
     end
 end.parse!
