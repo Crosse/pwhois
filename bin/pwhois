@@ -37,6 +37,11 @@ OptionParser.new do |opts|
     opts.on_tail("-V", "--version", "Show version") do
         puts Pwhois::VERSION
         exit
+    end
+
+    if ARGV.length == 0
+        puts "No domains given."
+        puts opts
         exit
     end
 end.parse!
