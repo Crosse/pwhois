@@ -1,7 +1,13 @@
 pwhois
 ======
 
-[![Gem Version](https://badge.fury.io/rb/pwhois.svg)](https://badge.fury.io/rb/pwhois)
+[![Gem Version][1]][2]
+[![Code Climate][3]][4]
+
+[1]:https://badge.fury.io/rb/pwhois.svg
+[2]:https://badge.fury.io/rb/pwhois
+[3]:https://codeclimate.com/github/Crosse/pwhois/badges/gpa.svg
+[4]:https://codeclimate.com/github/Crosse/pwhois
 
 `pwhois` is a small command-line utility that takes advantage of the
 [Ruby Whois][whois] module to parse Whois results and display them in a
@@ -16,10 +22,6 @@ This utility will not give you the full, parsed output of a whois query
 (yet).  It appears that the [Ruby Whois][whois] module supports only a
 subset of possible returned properties.  See the gem's
 [Properties][properties] page for the list of supported properties.
-
-*(This was a simple project to help me learn a little bit about Ruby.  If
-you're a Ruby guru, please don't look too closely at the code.  Or if you
-do, let me know where I could do things better.  Thanks!)*
 
 # Installation
 
