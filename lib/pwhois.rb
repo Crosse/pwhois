@@ -82,6 +82,8 @@ module Pwhois
                 rescue NoMethodError => e
                     $stderr.puts e.message
                     $stderr.puts e.backtrace
+                rescue Timeout::Error => e
+                    $stderr.puts "Timeout encountered retrieving data for #{q}"
                 rescue SystemExit,Interrupt
                     print_verbose("Ctrl-C pressed, exiting")
                     exit
