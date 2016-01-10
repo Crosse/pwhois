@@ -1,196 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'optparse'
-require 'whois'
+require 'pwhois'
 
-class Symbol
-    def titleize()
-        to_s.split('_').map { |words| words.capitalize }.join(' ')
-    end
-end
-
-class WhoisParser
-    # Constants
-    UNKNOWN = "UNKNOWN"
-
-    # Class variables
-    @@OUTPUT_STYLES = [ :csv, :tsv, :table, :list ]
-
-    # Instance variables
-    attr_accessor :verbose, :output_style, :attributes
-
-    def self.output_styles
-        @@OUTPUT_STYLES
-    end # output_styles
-
-
-    def initialize()
-        @whois_client = Whois::Client.new
-        @verbose = false
-        @output_style = :list
-        @attributes = [:domain, :created_on, :updated_on, :registrar_name]
-    end # initialize()
-
-
-    def get_attr(record, attr)
-        if record == nil
-            raise(ArgumentError, ":record must not be nil")
-        end
-
-        obj,a = nil
-
-        if "#{attr}".start_with?("registrar")
-            a = "#{attr}".split('_')[1]
-            get_attr(record.registrar, a)
-        else
-            if record.respond_to?(attr)
-                record.send(attr)
-            else
-                raise(ArgumentError, "Warning:  attribute \"#{ attr }\" does not exist for this domain")
-            end
-        end
-    end # get_attr()
-
-
-    def query(q)
-        query_list([ q ])
-    end # query()
-
-
-    def query_list(querys)
-        print_header()
-
-        # only required for table listings.
-        results = []
-
-        querys.each do |q|
-            result = Hash.new
-            begin
-                print_verbose("Querying whois for #{q}...")
-                record = @whois_client.lookup(q)
-                if !record
-                    $stderr.puts "wtf just happened"
-                end
-
-                attributes.each do |a|
-                    begin
-                        result[a] = get_attr(record, a)
-                    rescue ArgumentError => e
-                        $stderr.puts e.message
-                    end
-                end
-
-                if output_style == :table
-                    results.push(result)
-                else
-                    print_item(result)
-                end
-            rescue Whois::ConnectionError => e
-                $stderr.puts e.message
-            rescue NoMethodError => e
-                $stderr.puts e.message
-                $stderr.puts e.backtrace
-            rescue SystemExit,Interrupt
-                print_verbose("Ctrl-C pressed, exiting")
-                exit
-            rescue StandardError => e
-                $stderr.puts e.message
-                $stderr.puts e.backtrace
-                exit
-            end
-        end # querys.each
-
-        if output_style == :table
-            print_table(results)
-        end
-    end # query_list()
-
-    
-    private
-    def print_verbose(msg)
-        if verbose
-            $stderr.puts("[ #{msg} ]")
-        end
-    end # verbose()
-
-
-    private
-    def quote_if_include(str, char)
-        if "#{str}".include?(char)
-            "\"#{str}\""
-        else
-            "#{str}"
-        end
-    end
-
-
-    private
-    def print_header()
-        case output_style
-        when :csv
-            puts attributes.map{ |a| quote_if_include(a.titleize, ',') }.join(',')
-        when :tsv
-            puts attributes.map{ |a| quote_if_include(a.titleize, "\t") }.join("\t")
-        when :table
-            print_verbose("collating data, please wait...")
-        end
-    end # print_header()
-
-    
-    private
-    def print_item(result)
-        case output_style
-        when :csv
-            puts attributes.map{ |a| quote_if_include(result[a], ',') }.join(',')
-        when :tsv
-            puts attributes.map{ |a| result[a] }.join("\t")
-        when :list
-            print_list_item(result)
-        end
-    end # print_item()
-
-
-    private
-    def print_list_item(result)
-        l = attributes.map{ |a| a.length }.sort.last
-        attributes.each do |a|
-            printf("%-#{l}s:\t%s\n", a.titleize, result[a])
-        end
-        puts
-    end # print_list_item()
-
-
-    private
-    def print_table(records)
-        attr_lengths = Hash.new
-        attributes.each do |a|
-            l = records.map{ |r| r[a].to_s.length }.sort.last
-            attr_lengths[a] = (a.length > l) ? a.length : l
-        end
-
-        # print the header row
-        attributes.each do |a|
-            printf("%-#{attr_lengths[a]}s  ", a.titleize)
-        end
-        printf("\n")
-        attributes.each do |a|
-            print '-' * attr_lengths[a]
-            print '  '
-        end
-        printf("\n")
-
-        records.each do |r|
-            attributes.each do |a|
-                printf("%-#{attr_lengths[a]}s  ", r[a])
-            end
-            printf("\n")
-        end
-    end # print_table()
-
-end # class WhoisParser
-
-
-w = WhoisParser.new
+w = Pwhois::WhoisParser.new
 
 OptionParser.new do |opts|
     opts.banner = "Usage: #{opts.program_name} [options]"
@@ -202,8 +14,8 @@ OptionParser.new do |opts|
         w.verbose = v
     end
 
-    output_list = WhoisParser.output_styles.join(', ')
-    opts.on("-o", "--output TYPE", WhoisParser.output_styles,
+    output_list = w.output_styles.join(', ')
+    opts.on("-o", "--output TYPE", w.output_styles,
             "Output style.  One of: #{output_list}") do |style|
         w.output_style = style
     end
@@ -222,10 +34,10 @@ OptionParser.new do |opts|
         exit
     end
 
-    #opts.on_tail("--version", "Show version") do
-        #puts ::Version.join('.')
-        #exit
-    #end
+    opts.on_tail("-V", "--version", "Show version") do
+        puts w::Version
+        exit
+    end
 end.parse!
 
 w.query_list(ARGV)
