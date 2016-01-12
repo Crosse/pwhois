@@ -63,7 +63,7 @@ module Pwhois
                     print_verbose("Querying whois for #{q}...")
                     record = @whois_client.lookup(q)
                     if !record
-                        $stderr.puts "wtf just happened"
+                        $stderr.puts "No WHOIS record found for #{q}"
                     end
 
                     attributes.each do |a|
