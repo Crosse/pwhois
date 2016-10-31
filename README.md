@@ -3,11 +3,14 @@ pwhois
 
 [![Gem Version][1]][2]
 [![Code Climate][3]][4]
+[![Build Status][5]][6]
 
 [1]:https://badge.fury.io/rb/pwhois.svg
 [2]:https://badge.fury.io/rb/pwhois
 [3]:https://codeclimate.com/github/Crosse/pwhois/badges/gpa.svg
 [4]:https://codeclimate.com/github/Crosse/pwhois
+[5]: https://travis-ci.org/Crosse/pwhois.svg?branch=master
+[6]: https://travis-ci.org/Crosse/pwhois
 
 `pwhois` is a small command-line utility that takes advantage of the
 [Ruby Whois][whois] module to parse Whois results and display them in a
