@@ -81,15 +81,12 @@ module Pwhois
                     end
                 rescue Whois::ConnectionError => e
                     $stderr.puts e.message
-                rescue NoMethodError => e
-                    $stderr.puts e.message
-                    $stderr.puts e.backtrace
-                rescue Timeout::Error => e
+                rescue Timeout::Error
                     $stderr.puts "Timeout encountered retrieving data for #{q}"
                 rescue SystemExit,Interrupt
                     print_verbose("Ctrl-C pressed, exiting")
                     exit
-                rescue StandardError => e
+                rescue NoMethodError, StandardError => e
                     $stderr.puts e.message
                     $stderr.puts e.backtrace
                     exit
@@ -110,7 +107,6 @@ module Pwhois
         end # verbose()
 
 
-        private
         def quote_if_include(str, char)
             if "#{str}".include?(char)
                 "\"#{str}\""
@@ -120,7 +116,6 @@ module Pwhois
         end
 
 
-        private
         def print_header()
             case output_style
             when :csv
@@ -133,7 +128,6 @@ module Pwhois
         end # print_header()
 
 
-        private
         def print_item(result)
             case output_style
             when :csv
@@ -146,7 +140,6 @@ module Pwhois
         end # print_item()
 
 
-        private
         def print_list_item(result)
             l = attributes.map{ |a| a.length }.sort.last
             attributes.each do |a|
@@ -156,7 +149,6 @@ module Pwhois
         end # print_list_item()
 
 
-        private
         def print_table(records)
             attr_lengths = Hash.new
             attributes.each do |a|
