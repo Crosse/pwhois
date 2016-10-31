@@ -4,3 +4,11 @@ rvm:
   - 2.3.1
 sudo: false
 cache: bundler
+deploy:
+  provider: rubygems
+  api_key:
+    secure: aQOpnw/M8HBRkSpWZbYwve9MRfWg72gPLoAGV1GGHzYJEOY/mWTXMm8O/UPo6a7aRHCezOrMWtJYY6hWhP56rMyuKQPOJnS0CA3pl1b0o0OwYoRzfnYupEp/hoCHmk4e4bUa2rGiDr6NCEQubf4PYzI9VPukOmRRBjgxzcoeq91n1J2iAlQ2rqfYm0x+dL/HSmiDDEIh2qnRHfL0JaeYCVdkvT9XAVaSksV/Tcm+x8Sl/eSuU4AqObEbKk6c6pdRCuZnzhssGn5Qy5uJ5C/c2R9X/UIRvI6iGLCNxP0hEOqa3760yNqXoB9uz3ZwHomCWGgV6J01drJ2SIXUO4OqIZ29fxMZ/LDX9ZP3xZ8e3KYiEP7wViv5gt4M7FQW2mNUTenaLj3P22EDc9NcNdCxb6p7W+xCblUJKBbIeQr+r+sziwo7/F7Gy/P1E3B5SJmS1ji69LLWpVfMW6psTX2gNM/xMv+MaOyYKD0Qab841M2wRW6bYxM3PbfSkdmWwfikpZg1LruhxjQQguQQuhm9b9IHqFRWv5q2xrjyhTIS/OcaWPKtAbiipivU/ZK0kxq9iBgtlejMn/nxfDuozLnLRCb0OxZO8roq8cLIN62o/Yb9ggydczC5bSiXVezyaM7vLyUU10/yqF82Ey6XRzBSp+3Zj7YQfeKAGLRyiE/+W68=
+  gem: pwhois
+  on:
+    tags: true
+    repo: Crosse/pwhois
