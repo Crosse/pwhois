@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
     consistent, coherent style.
   EOF
   spec.homepage      = "https://github.com/Crosse/pwhois"
-  spec.license       = "ISC"
+  spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($\)
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
