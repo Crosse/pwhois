@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     pwhois (1.2.2)
-      whois (>= 3.6, < 5.0)
+      whois (>= 3.6, < 6.0)
 
 GEM
   remote: https://rubygems.org/
@@ -24,7 +24,7 @@ GEM
     rspec-support (3.10.0)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
-    whois (4.0.8)
+    whois (4.1.0)
 
 PLATFORMS
   ruby
