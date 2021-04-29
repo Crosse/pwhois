@@ -1,5 +1,8 @@
-pwhois
-======
+# pwhois
+
+## -- NO LONGER MAINTAINED --
+I haven't realistically used this since 2016. I will keep the gem on
+rubygems.org, but otherwise this repository will be archived.
 
 [![Gem Version][1]][2]
 [![Code Climate][3]][4]
@@ -31,7 +34,7 @@ subset of possible returned properties.  See the gem's
 # Usage
     $ pwhois -h
     Usage: pwhois [options]
-    
+
     Specific options:
         -v, --[no-]verbose               Run verbosely
         -o, --output TYPE                Output style.  One of: csv, tsv, table, list
@@ -62,9 +65,9 @@ subset of possible returned properties.  See the gem's
 
 ## Table
     $ pwhois -o table github.com
-    Domain      Created On                 Updated On                 Registrar Name     
-    ----------  -------------------------  -------------------------  -----------------  
-    github.com  2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.  
+    Domain      Created On                 Updated On                 Registrar Name
+    ----------  -------------------------  -------------------------  -----------------
+    github.com  2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.
 
 
 # Multiple Queries
@@ -114,7 +117,7 @@ Individual records are separated by a blank line:
     Created On    : 2010-02-03 18:03:27 UTC
     Updated On    : 2014-03-14 01:20:28 UTC
     Registrar Name: eNom, Inc. (R39-LROR)
- 
+
 
 ## Table Style
 
@@ -124,13 +127,13 @@ in order to figure out proper column widths.  If you want to know what's
 going on, use the `-v|--verbose` option.)
 
     $ pwhois -o table $(<domains.txt)
-    Domain          Created On                 Updated On                 Registrar Name               
-    --------------  -------------------------  -------------------------  ---------------------------  
-    github.com      2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.            
-    google.com      2002-10-02 03:00:00 -0400  2014-05-19 07:00:17 -0400  MarkMonitor, Inc.            
-    cnn.com         1993-09-22 00:00:00 -0400  2013-11-27 04:31:40 -0500  CSC CORPORATE DOMAINS, INC.  
-    twitter.com     2000-01-21 11:28:17 -0500  2013-11-28 05:57:01 -0500  CSC CORPORATE DOMAINS, INC.  
-    ruby-whois.org  2010-02-03 18:03:27 UTC    2014-03-14 01:20:28 UTC    eNom, Inc. (R39-LROR)        
+    Domain          Created On                 Updated On                 Registrar Name
+    --------------  -------------------------  -------------------------  ---------------------------
+    github.com      2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.
+    google.com      2002-10-02 03:00:00 -0400  2014-05-19 07:00:17 -0400  MarkMonitor, Inc.
+    cnn.com         1993-09-22 00:00:00 -0400  2013-11-27 04:31:40 -0500  CSC CORPORATE DOMAINS, INC.
+    twitter.com     2000-01-21 11:28:17 -0500  2013-11-28 05:57:01 -0500  CSC CORPORATE DOMAINS, INC.
+    ruby-whois.org  2010-02-03 18:03:27 UTC    2014-03-14 01:20:28 UTC    eNom, Inc. (R39-LROR)
 
 
 # Specifying Attributes to Print
@@ -177,13 +180,13 @@ see what sort of weird verbose logging I do, you can enable verbose mode:
     [ Querying whois for cnn.com... ]
     [ Querying whois for twitter.com... ]
     [ Querying whois for ruby-whois.org... ]
-    Domain          Created On                 Updated On                 Registrar Name               
-    --------------  -------------------------  -------------------------  ---------------------------  
-    github.com      2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.            
-    google.com      2002-10-02 03:00:00 -0400  2014-05-19 07:00:17 -0400  MarkMonitor, Inc.            
-    cnn.com         1993-09-22 00:00:00 -0400  2013-11-27 04:31:40 -0500  CSC CORPORATE DOMAINS, INC.  
-    twitter.com     2000-01-21 11:28:17 -0500  2013-11-28 05:57:01 -0500  CSC CORPORATE DOMAINS, INC.  
-    ruby-whois.org  2010-02-03 18:03:27 UTC    2014-03-14 01:20:28 UTC    eNom, Inc. (R39-LROR)        
+    Domain          Created On                 Updated On                 Registrar Name
+    --------------  -------------------------  -------------------------  ---------------------------
+    github.com      2013-06-14 19:07:02 -0400  2013-11-27 07:00:15 -0500  MarkMonitor, Inc.
+    google.com      2002-10-02 03:00:00 -0400  2014-05-19 07:00:17 -0400  MarkMonitor, Inc.
+    cnn.com         1993-09-22 00:00:00 -0400  2013-11-27 04:31:40 -0500  CSC CORPORATE DOMAINS, INC.
+    twitter.com     2000-01-21 11:28:17 -0500  2013-11-28 05:57:01 -0500  CSC CORPORATE DOMAINS, INC.
+    ruby-whois.org  2010-02-03 18:03:27 UTC    2014-03-14 01:20:28 UTC    eNom, Inc. (R39-LROR)
 
 Verbose output is printed to `stderr`.
 
